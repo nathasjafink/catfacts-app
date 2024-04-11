@@ -21,7 +21,7 @@ fun SingleCatFact(){
             Modifier.padding(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = viewModel.currentCatFact)
+            Text(text = viewModel.currentCatFactString)
             Button(onClick = { viewModel.getRandomFact() }) {
                 Text("Fetch a fact")
             }

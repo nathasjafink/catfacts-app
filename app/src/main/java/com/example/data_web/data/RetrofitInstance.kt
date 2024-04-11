@@ -3,7 +3,6 @@ package com.example.data_web.data
 import com.example.data_web.network.CatFactsApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class RetrofitInstance {
     private val baseURL = "https://catfact.ninja/";
