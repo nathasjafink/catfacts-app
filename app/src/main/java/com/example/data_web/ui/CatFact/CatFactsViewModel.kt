@@ -1,5 +1,6 @@
 package com.example.data_web.ui.CatFact
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
@@ -19,9 +20,13 @@ import kotlinx.coroutines.withContext
 class CatFactsViewModel : ViewModel() {
     private val catFactsRepository = CatFactsRepository();
 
-    private val catFactList = MutableLiveData<ArrayList<String>>()
+    private val savedCatFactList = mutableStateListOf<String>()
 
-    fun getCatFacts (): LiveData<ArrayList<String>> = catFactList
+    private val savedCatFactCount = mutableStateOf(0)
+
+    fun getSavedCatFacts (): List<String> = savedCatFactList
+
+    fun getSavedCatFactCount (): Int = savedCatFactCount.value
 
     var currentCatFactString: String by mutableStateOf("")
         private set;
@@ -36,5 +41,14 @@ class CatFactsViewModel : ViewModel() {
                 currentCatFactString = e.message.toString()
             }
         }
+    }
+
+    fun saveCatFact (catFact : String) {
+        if (!savedCatFactList.contains(catFact)) {
+            savedCatFactList.add(currentCatFactString)
+
+            savedCatFactCount.value++
+        }
+
     }
 }

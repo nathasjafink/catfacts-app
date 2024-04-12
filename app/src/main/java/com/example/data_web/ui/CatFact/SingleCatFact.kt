@@ -20,6 +20,8 @@ import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 fun SingleCatFact(){
     val viewModel = viewModel<CatFactsViewModel>()
 
+    val savedCatFactCount = viewModel.getSavedCatFactCount()
+
     Box {
         Column(
             Modifier.padding(30.dp),
@@ -30,7 +32,7 @@ fun SingleCatFact(){
             Text(text = viewModel.currentCatFactString)
             Spacer(modifier = Modifier.height(70.dp))
             Row {
-                Button(onClick = {}) {
+                Button(onClick = {viewModel.saveCatFact(viewModel.currentCatFactString)}) {
                     Text("Like")
                 }
                 Spacer(modifier = Modifier.width(20.dp))
@@ -38,6 +40,13 @@ fun SingleCatFact(){
                     Text("Next")
                 }
             }
+            Spacer(modifier = Modifier.height(30.dp))
+            Text("Saved cat facts: $savedCatFactCount ")
+
+            val savedCatFactText = viewModel.getSavedCatFacts().joinToString("\n")
+
+            Spacer(modifier = Modifier.height(30.dp))
+            Text(text = savedCatFactText)
 
         }
     }
